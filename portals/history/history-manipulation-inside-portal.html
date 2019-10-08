@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="resources/run-test-in-portal.js"></script>
+<body>
+<script>
+  var portalSrc =
+      'resources/portal-manipulate-history.html';
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testHistoryPushStateInPortal');
+  }, 'history.pushState navigates independently in a portal');
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testHistoryReplaceStateInPortal');
+  }, 'history.replaceState navigates independently in a portal');
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testLocationAssignInPortal');
+  }, 'location.assign navigates independently in a portal');
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testLocationReplaceInPortal');
+  }, 'location.replace navigates independently in a portal');
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testSetLocationHrefInPortal');
+  }, 'Setting location.href navigates independently in a portal');
+
+  promise_test(() => {
+    return runTestInPortal(portalSrc, 'testSyntheticAnchorClickInPortal');
+  }, 'Synthetic anchor click navigates independently in a portal');
+</script>
+</body>
