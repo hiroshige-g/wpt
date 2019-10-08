@@ -1,0 +1,25 @@
+<html>
+<body>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/common/get-host-info.sub.js"></script>
+<script>
+async_test(t => {
+  let frame = document.createElement('iframe');
+  frame.src = get_host_info()["HTTPS_REMOTE_ORIGIN"] + "/client-hints/resources/expect-client-hints-headers-iframe.py?device-memory=true&dpr=false";
+  frame.allow = "ch-device-memory";
+  window.addEventListener('message', t.step_func(function(e) {
+    if(!e.source === frame.contentWindow)
+      return;
+    if(typeof e.data != "string")
+      return;
+    assert_equals(e.data, "PASS");
+    t.done();
+  }));
+  document.body.appendChild(frame);
+}, "Client hint loaded on iframe request with feature policy.");
+// TODO(yoav): global FP and no specific one. Not global FP and a specific one, no global FP and no specific one, frame trying to set its own CH
+
+</script>
+</body>
+</html>
